@@ -2,7 +2,7 @@
 
 ## Кнопка
 Стандартная кнопка:
-```html
+
 <button style="padding: 10px 15px; background: #0366d6; color: white; border: none; border-radius: 5px; cursor: pointer;">
     Нажми меня
 </button>
