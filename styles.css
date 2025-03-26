@@ -12,8 +12,9 @@ body {
     width: 260px;
     background: #f6f8fa;
     padding: 20px;
-    height: 100vh;
+    height: 100%;
     overflow-y: auto;
+    position: fixed;
     border-right: 1px solid #e1e4e8;
 }
 
