@@ -17,12 +17,12 @@
     </div>
     
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const menu = document.getElementById("menu");
     const title = document.getElementById("title");
     const content = document.getElementById("article-content");
 
-    // Список статей с категориями
+    // Полный список статей
     const articles = [
         { category: "Раздел 1. Введение. Цифровизация и цифровая экономика", items: [
             { name: "Цифровизация", file: "docs/less1.md" },
@@ -53,6 +53,27 @@
         ]}
     ];
 
+    // Функция загрузки статьи
+    function loadArticle(file, name, clickedLink) {
+        fetch(file)
+            .then(response => response.text())
+            .then(text => {
+                title.textContent = name;
+                content.innerHTML = marked.parse(text);
+
+                // Убираем active у всех ссылок
+                document.querySelectorAll(".sidebar ul li a").forEach(link => {
+                    link.classList.remove("active");
+                });
+
+                // Добавляем active к нажатой ссылке
+                clickedLink.classList.add("active");
+            })
+            .catch(error => {
+                content.innerHTML = "Ошибка загрузки статьи.";
+            });
+    }
+
     // Заполняем меню
     articles.forEach(section => {
         let sectionLi = document.createElement("li");
@@ -60,18 +81,17 @@
         sectionTitle.textContent = section.category;
         sectionTitle.classList.add("menu-category");
         sectionLi.appendChild(sectionTitle);
-        
+
         let subMenu = document.createElement("ul");
         subMenu.classList.add("submenu");
-        
+
         section.items.forEach(article => {
             let li = document.createElement("li");
             let a = document.createElement("a");
+            a.href = "#"; 
             a.textContent = article.name;
-            a.dataset.file = article.file; // Вместо href используем data-file
-            a.onclick = function() {
-                setActive(a);
-                loadArticle(article.file, article.name);
+            a.onclick = function () {
+                loadArticle(article.file, article.name, a);
             };
             li.appendChild(a);
             subMenu.appendChild(li);
@@ -81,38 +101,14 @@
         menu.appendChild(sectionLi);
     });
 
-    // Функция установки активного элемента
-    function setActive(activeElement) {
-        document.querySelectorAll("#menu a").forEach(a => a.classList.remove("active"));
-        activeElement.classList.add("active");
-
-        // Сохраняем активную статью в localStorage
-        localStorage.setItem("activeArticle", activeElement.dataset.file);
-    }
-
-    // Загрузка Markdown-файла
-    function loadArticle(file, name) {
-        fetch(file)
-            .then(response => response.text())
-            .then(text => {
-                title.textContent = name;
-                content.innerHTML = marked.parse(text);
-            })
-            .catch(() => {
-                content.innerHTML = "Ошибка загрузки статьи.";
-            });
-    }
-
-    // Загружаем последнюю открытую статью (если есть)
-    let savedArticle = localStorage.getItem("activeArticle");
-    if (savedArticle) {
-        let savedElement = document.querySelector(`[data-file='${savedArticle}']`);
-        if (savedElement) {
-            setActive(savedElement);
-            loadArticle(savedArticle, savedElement.textContent);
-        }
-    }
+    // Открытие подменю
+    document.querySelectorAll(".menu-category").forEach(category => {
+        category.addEventListener("click", function () {
+            this.nextElementSibling.classList.toggle("open");
+        });
+    });
 });
+
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
