@@ -5,6 +5,13 @@ body {
     margin: 0;
     background-color: #ffffff;
     color: #24292e;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Темная тема */
+body.dark-mode {
+    background-color: #0d1117;
+    color: #c9d1d9;
 }
 
 /* Сайдбар (меню слева) */
@@ -16,6 +23,12 @@ body {
     overflow-y: auto;
     position: fixed;
     border-right: 1px solid #d0d7de;
+    transition: background 0.3s;
+}
+
+body.dark-mode .sidebar {
+    background: #161b22;
+    border-right: 1px solid #30363d;
 }
 
 .sidebar h2 {
@@ -24,6 +37,10 @@ body {
     color: #57606a;
     text-transform: uppercase;
     margin-bottom: 12px;
+}
+
+body.dark-mode .sidebar h2 {
+    color: #8b949e;
 }
 
 .sidebar ul {
@@ -43,17 +60,57 @@ body {
     display: block;
     padding: 6px 12px;
     border-radius: 6px;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+body.dark-mode .sidebar ul li a {
+    color: #c9d1d9;
 }
 
 .sidebar ul li a:hover {
     background: #f6f8fa;
 }
 
+body.dark-mode .sidebar ul li a:hover {
+    background: #21262d;
+}
+
 .sidebar ul li a.active {
     background: #ddf4ff;
     color: #0969da;
     font-weight: 600;
+}
+
+body.dark-mode .sidebar ul li a.active {
+    background: #1f6feb;
+    color: #ffffff;
+}
+
+/* Группы в меню */
+.menu-category {
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.menu-category:hover {
+    background: #f6f8fa;
+}
+
+body.dark-mode .menu-category:hover {
+    background: #21262d;
+}
+
+.submenu {
+    display: none;
+    padding-left: 12px;
+}
+
+.submenu.open {
+    display: block;
 }
 
 /* Контентная область */
@@ -74,6 +131,10 @@ h1 {
     margin-bottom: 20px;
 }
 
+body.dark-mode h1 {
+    border-bottom: 1px solid #30363d;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
     body {
@@ -86,6 +147,10 @@ h1 {
         position: relative;
         border-right: none;
         border-bottom: 1px solid #d0d7de;
+    }
+
+    body.dark-mode .sidebar {
+        border-bottom: 1px solid #30363d;
     }
 
     .content {
