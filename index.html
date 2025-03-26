@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Документация</h2>
+        <ul id="menu"></ul>
+    </div>
+    <div class="content">
+        <h1 id="title">Добро пожаловать</h1>
+        <div id="article-content">Выберите статью из меню.</div>
+    </div>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menu = document.getElementById("menu");
+        const title = document.getElementById("title");
+        const content = document.getElementById("article-content");
+        
+        // Список статей
+        const articles = [
+            { name: "Введение", file: "docs/intro.md" },
+            { name: "Руководство", file: "docs/guide.md" },
+            { name: "Частые вопросы", file: "docs/faq.md" }
+        ];
+        
+        // Заполняем меню
+        articles.forEach(article => {
+            let li = document.createElement("li");
+            let a = document.createElement("a");
+            a.href = "#";
+            a.textContent = article.name;
+            a.onclick = function() {
+                loadArticle(article.file, article.name);
+            };
+            li.appendChild(a);
+            menu.appendChild(li);
+        });
+        
+        // Загрузка Markdown-файла
+        function loadArticle(file, name) {
+            fetch(file)
+                .then(response => response.text())
+                .then(text => {
+                    title.textContent = name;
+                    content.innerHTML = marked.parse(text); // Парсим Markdown
+                })
+                .catch(error => {
+                    content.innerHTML = "Ошибка загрузки статьи.";
+                });
+        }
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</body>
+</html>
