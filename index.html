@@ -18,94 +18,102 @@
     
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const menu = document.getElementById("menu");
-        const title = document.getElementById("title");
-        const content = document.getElementById("article-content");
-        const themeToggle = document.getElementById("theme-toggle");
+    const menu = document.getElementById("menu");
+    const title = document.getElementById("title");
+    const content = document.getElementById("article-content");
+
+    // Список статей с категориями
+    const articles = [
+        { category: "Раздел 1. Введение. Цифровизация и цифровая экономика", items: [
+            { name: "Цифровизация", file: "docs/less1.md" },
+            { name: "Цифровая экономика", file: "docs/less2.md" },
+            { name: "Основы цифровой экономики", file: "docs/less3.md" },
+            { name: "Цифровая безопасность", file: "docs/less4.md" }
+        ]},
+        { category: "Раздел 2. Облачные технологии", items: [
+            { name: "Введение", file: "docs/less5.md" },
+            { name: "Достоинства и недостатки", file: "docs/less6.md" },
+            { name: "Обзор сервисов", file: "docs/less7.md" },
+            { name: "Сервисы Google Docs", file: "docs/less8.md" },
+            { name: "Создание презентаций", file: "docs/less9.md" },
+            { name: "Электронные таблицы", file: "docs/less10.md" }
+        ]},
+        { category: "Раздел 3. Электронные документы", items: [
+            { name: "Создание и редактирование", file: "docs/less11.md" },
+            { name: "Разрыв страниц и разделов. Колонтитулы", file: "docs/less12.md" },
+            { name: "Создание сносок, список", file: "docs/less13.md" },
+            { name: "Оглавление, закладки", file: "docs/less14.md" },
+            { name: "Формулы и функции", file: "docs/less15.md" },
+            { name: "Решение задач", file: "docs/less16.md" },
+            { name: "Построение диаграмм", file: "docs/less17.md" },
+            { name: "Графические возможности", file: "docs/less18.md" }
+        ]},
+        { category: "Дополнительно", items: [
+            { name: "Примеры элементов", file: "docs/example.md" }
+        ]}
+    ];
+
+    // Заполняем меню
+    articles.forEach(section => {
+        let sectionLi = document.createElement("li");
+        let sectionTitle = document.createElement("p");
+        sectionTitle.textContent = section.category;
+        sectionTitle.classList.add("menu-category");
+        sectionLi.appendChild(sectionTitle);
         
-        // Список статей с категориями
-        const articles = [
-            { category: "Раздел 1. Введение. Цифровизация и цифровая экономика", items: [
-                { name: "Цифровизация", file: "docs/less1.md" },
-                { name: "Цифровая экономика", file: "docs/less2.md" },
-                { name: "Основы цифровой экономики", file: "docs/less3.md" },
-                { name: "Цифровая безопасность", file: "docs/less4.md" }
-            ]},
-            { category: "Раздел 2. Облачные технологии", items: [
-                { name: "Введение", file: "docs/less5.md" },
-                { name: "Достоинства и недостатки", file: "docs/less6.md" },
-                { name: "Обзор сервисов", file: "docs/less7.md" },
-                { name: "Сервисы Google Docs", file: "docs/less8.md" },
-                { name: "Создание презентаций", file: "docs/less9.md" },
-                { name: "Электронные таблицы", file: "docs/less10.md" }
-            ]},
-            { category: "Раздел 3. Электронные документы", items: [
-                { name: "Создание и редактирование", file: "docs/less11.md" },
-                { name: "Разрыв страниц и разделов. Колонтитулы", file: "docs/less12.md" },
-                { name: "Создание сносок, список", file: "docs/less13.md" },
-                { name: "Оглавление, закладки", file: "docs/less14.md" },
-                { name: "Формулы и функции", file: "docs/less15.md" },
-                { name: "Решение задач", file: "docs/less16.md" },
-                { name: "Построение диаграмм", file: "docs/less17.md" },
-                { name: "Графические возможности", file: "docs/less18.md" }
-            ]},
-            { category: "Дополнительно", items: [
-                { name: "Примеры элементов", file: "docs/example.md" }
-            ]}
-        ];
+        let subMenu = document.createElement("ul");
+        subMenu.classList.add("submenu");
         
-        // Заполняем меню
-        articles.forEach(section => {
-            let sectionLi = document.createElement("li");
-            let sectionTitle = document.createElement("p");
-            sectionTitle.textContent = section.category;
-            sectionTitle.classList.add("menu-category");
-            sectionLi.appendChild(sectionTitle);
-            
-            let subMenu = document.createElement("ul");
-            subMenu.classList.add("submenu");
-            
-            section.items.forEach(article => {
-                let li = document.createElement("li");
-                let a = document.createElement("a");
-                a.href = "#";
-                a.textContent = article.name;
-                a.onclick = function() {
-                    loadArticle(article.file, article.name);
-                };
-                li.appendChild(a);
-                subMenu.appendChild(li);
-            });
-            
-            sectionLi.appendChild(subMenu);
-            menu.appendChild(sectionLi);
+        section.items.forEach(article => {
+            let li = document.createElement("li");
+            let a = document.createElement("a");
+            a.textContent = article.name;
+            a.dataset.file = article.file; // Вместо href используем data-file
+            a.onclick = function() {
+                setActive(a);
+                loadArticle(article.file, article.name);
+            };
+            li.appendChild(a);
+            subMenu.appendChild(li);
         });
-        
-        // Разворачивание меню
-        document.querySelectorAll(".menu-category").forEach(category => {
-            category.addEventListener("click", function() {
-                this.nextElementSibling.classList.toggle("open");
-            });
-        });
-        
-        // Переключение темы
-        themeToggle.addEventListener("click", function() {
-            document.body.classList.toggle("dark-mode");
-        });
-        
-        // Загрузка Markdown-файла
-        function loadArticle(file, name) {
-            fetch(file)
-                .then(response => response.text())
-                .then(text => {
-                    title.textContent = name;
-                    content.innerHTML = marked.parse(text); // Парсим Markdown
-                })
-                .catch(error => {
-                    content.innerHTML = "Ошибка загрузки статьи.";
-                });
-        }
+
+        sectionLi.appendChild(subMenu);
+        menu.appendChild(sectionLi);
     });
+
+    // Функция установки активного элемента
+    function setActive(activeElement) {
+        document.querySelectorAll("#menu a").forEach(a => a.classList.remove("active"));
+        activeElement.classList.add("active");
+
+        // Сохраняем активную статью в localStorage
+        localStorage.setItem("activeArticle", activeElement.dataset.file);
+    }
+
+    // Загрузка Markdown-файла
+    function loadArticle(file, name) {
+        fetch(file)
+            .then(response => response.text())
+            .then(text => {
+                title.textContent = name;
+                content.innerHTML = marked.parse(text);
+            })
+            .catch(() => {
+                content.innerHTML = "Ошибка загрузки статьи.";
+            });
+    }
+
+    // Загружаем последнюю открытую статью (если есть)
+    let savedArticle = localStorage.getItem("activeArticle");
+    if (savedArticle) {
+        let savedElement = document.querySelector(`[data-file='${savedArticle}']`);
+        if (savedElement) {
+            setActive(savedElement);
+            loadArticle(savedArticle, savedElement.textContent);
+        }
+    }
+});
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
