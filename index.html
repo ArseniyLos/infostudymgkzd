@@ -9,6 +9,7 @@
 <body>
     <div class="sidebar">
         <h2>Документация</h2>
+        <button id="theme-toggle">🌙</button>
         <ul id="menu"></ul>
     </div>
     <div class="content">
@@ -21,25 +22,57 @@
         const menu = document.getElementById("menu");
         const title = document.getElementById("title");
         const content = document.getElementById("article-content");
+        const themeToggle = document.getElementById("theme-toggle");
         
-        // Список статей
+        // Список статей с категориями
         const articles = [
-            { name: "Введение", file: "docs/intro.md" },
-            { name: "Руководство", file: "docs/guide.md" },
-            { name: "Частые вопросы", file: "docs/faq.md" }
+            { category: "Основное", items: [
+                { name: "Введение", file: "docs/intro.md" },
+                { name: "Руководство", file: "docs/guide.md" }
+            ]},
+            { category: "Дополнительно", items: [
+                { name: "Частые вопросы", file: "docs/faq.md" },
+                { name: "Примеры элементов", file: "docs/examples.md" }
+            ]}
         ];
         
         // Заполняем меню
-        articles.forEach(article => {
-            let li = document.createElement("li");
-            let a = document.createElement("a");
-            a.href = "#";
-            a.textContent = article.name;
-            a.onclick = function() {
-                loadArticle(article.file, article.name);
-            };
-            li.appendChild(a);
-            menu.appendChild(li);
+        articles.forEach(section => {
+            let sectionLi = document.createElement("li");
+            let sectionTitle = document.createElement("p");
+            sectionTitle.textContent = section.category;
+            sectionTitle.classList.add("menu-category");
+            sectionLi.appendChild(sectionTitle);
+            
+            let subMenu = document.createElement("ul");
+            subMenu.classList.add("submenu");
+            
+            section.items.forEach(article => {
+                let li = document.createElement("li");
+                let a = document.createElement("a");
+                a.href = "#";
+                a.textContent = article.name;
+                a.onclick = function() {
+                    loadArticle(article.file, article.name);
+                };
+                li.appendChild(a);
+                subMenu.appendChild(li);
+            });
+            
+            sectionLi.appendChild(subMenu);
+            menu.appendChild(sectionLi);
+        });
+        
+        // Разворачивание меню
+        document.querySelectorAll(".menu-category").forEach(category => {
+            category.addEventListener("click", function() {
+                this.nextElementSibling.classList.toggle("open");
+            });
+        });
+        
+        // Переключение темы
+        themeToggle.addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
         });
         
         // Загрузка Markdown-файла
