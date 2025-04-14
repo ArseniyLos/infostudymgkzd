@@ -42,7 +42,7 @@
 
 ## IV.	ЛИЧНАЯ БЕЗОПАСНОСТЬ В СЕТИ ИНТЕРНЕТ
 
-<img style="width: 400px;" src="https://i.imgur.com/gteeKUb.png" alt="https://i.imgur.com/gteeKUb.png">
+<img style="width: 550px;" src="https://i.imgur.com/gteeKUb.png" alt="https://i.imgur.com/gteeKUb.png">
 
 ## V.	КАК ЗАЩИТИТЬСЯ ОТ АТАК: ПОЛЕЗНЫЕ СОВЕТЫ ПО КИБЕРБЕЗОПАСНОСТИ
 1.	Обновите программное обеспечение и операционную систему. Используя новое ПО  вы получаете свежие исправления безопасности.
