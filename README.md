@@ -1,1 +1,1 @@
-# https://arseniylos.github.io/infostudymgk/
+# https://arseniylos.github.io/infostudymgkzd
