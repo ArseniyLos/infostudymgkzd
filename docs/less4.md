@@ -44,6 +44,10 @@
 
 <img style="width: 550px;" src="https://i.imgur.com/gteeKUb.png" alt="https://i.imgur.com/gteeKUb.png">
 
+<button style="padding:10px 20px; font-size:16px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+  <a href="prezent_less4.pdf">Посмотреть презентацию</a>
+</button>
+
 ## V.	КАК ЗАЩИТИТЬСЯ ОТ АТАК: ПОЛЕЗНЫЕ СОВЕТЫ ПО КИБЕРБЕЗОПАСНОСТИ
 1.	Обновите программное обеспечение и операционную систему. Используя новое ПО  вы получаете свежие исправления безопасности.
 2.	Используйте антивирусные программы. Защитные решения, такие как Kaspersky Total Security, помогут выявить и устранить угрозы. Для максимальной безопасности регулярно обновляйте программное обеспечение.
