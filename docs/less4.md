@@ -45,7 +45,7 @@
 <img style="width: 550px;" src="https://i.imgur.com/gteeKUb.png" alt="https://i.imgur.com/gteeKUb.png"><br>
 
 <button style="padding:10px 20px; font-size:16px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
-  <a href="prezent_less4.pdf">Посмотреть презентацию</a>
+  <a href="docs/prezent_less4.pdf">Посмотреть презентацию</a>
 </button>
 
 ## V.	КАК ЗАЩИТИТЬСЯ ОТ АТАК: ПОЛЕЗНЫЕ СОВЕТЫ ПО КИБЕРБЕЗОПАСНОСТИ
