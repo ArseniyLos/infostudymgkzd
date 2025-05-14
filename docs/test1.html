@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Содержание</h2>
+        <ul id="menu"></ul>
+    </div>
+    <div class="content">
+        <h1 id="title">Итоговый тест</h1>
+        <div id="article-content">Текстовый редактор Microsoft Word</div>
+        <div class="wrapper">
+			<main class="main">
+				<div class="quiz__head">
+					<div class="head__content" id="head">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut ducimus odit accusamus, illum quas magni provident odio praesentium commodi sint, porro harum, minus cupiditate architecto culpa aut ex dolore officia.</div>
+				</div>
+				<div class="quiz__body">
+					<div class="buttons">
+						<div class="buttons__content" id="buttons">
+							<button class="button">Default button</button><br>
+							<button class="button button_wrong">Wrong answer</button><br>
+							<button class="button button_correct">Correct answer</button><br>
+							<button class="button button_passive">Unclicked button</button><br>
+						</div>
+					</div>
+
+					<div class="quiz__footer">
+						<div class="footer__content" id="pages">0 / 0</div>
+					</div>
+				</div>
+				
+			</main>
+		</div>
+		<script type="text/javascript" src="scripts/app.js"></script>
+        <style>
+            .wrapper
+{
+	width: 100%;
+	height: 100%;
+	display: table;
+}
+
+.main
+{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.quiz-frame
+{
+	border: 0;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.quiz__head
+{
+	font-size: 20pt;
+	margin: 10px;
+	margin-bottom: 50px;
+}
+
+.head__content 
+{
+	padding: 5px;
+}
+
+.quiz__body
+{
+	margin: 10px;
+}
+
+.quiz__footer 
+{
+	position: absolute;
+	bottom: 0;
+	display: block;
+	width: 100%;
+}
+
+.footer__content 
+{
+	padding: 5px;
+}
+
+.button
+{
+	border: 0;
+	border-radius: 10px;
+	background: #1f6feb;
+	color: #fff;
+	padding: 10px 25px;
+	width: 70%;
+	font-size: 15pt;
+	display: block;
+	margin: 2px auto;
+	cursor: pointer;
+}
+
+.button_wrong 
+{
+	background: #EB6465;
+}
+
+.button_correct
+{
+	background: #5EB97D;
+}
+
+.button_passive
+{
+	background: #B3B3B3;
+}
+.wrapper
+{
+	width: 100%;
+}
+
+.quiz-frame
+{
+	border: 0;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	margin: 20px;
+}
+        </style>
+    </div>
+    
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menu = document.getElementById("menu");
+    const title = document.getElementById("title");
+    const content = document.getElementById("article-content");
+
+    // Полный список статей
+    const articles = [
+        { category: "Раздел 1. Введение. Цифровизация и цифровая экономика", items: [
+            { name: "1. Цифровизация", file: "less1.md" },
+            { name: "2. Цифровая экономика", file: "less2.md" },
+            { name: "3. Основы цифровой экономики", file: "less3.md" },
+            { name: "4. Цифровая безопасность", file: "less4.md" }
+        ]},
+        { category: "Раздел 2. Облачные технологии", items: [
+            { name: "5. Введение", file: "less5.md" },
+            { name: "6. Достоинства и недостатки", file: "less6.md" },
+            { name: "7. Обзор сервисов", file: "less7.md" },
+            { name: "8. Сервисы Google Docs", file: "less8.md" },
+            { name: "9. Создание презентаций", file: "less9.md" },
+            { name: "10. Электронные таблицы", file: "less10.md" }
+        ]},
+        { category: "Раздел 3. Электронные документы", items: [
+            { name: "11. Создание и редактирование", file: "less11.md" },
+            { name: "12. Разрыв страниц и разделов. Колонтитулы", file: "less12.md" },
+            { name: "13. Создание сносок, список", file: "less13.md" },
+            { name: "14. Оглавление, закладки", file: "less14.md" },
+            { name: "15. Формулы и функции", file: "less15.md" },
+            { name: "16. Решение задач", file: "less16.md" },
+            { name: "17. Построение диаграмм", file: "less17.md" },
+            { name: "18. Графические возможности", file: "less18.md" }
+        ]},
+        { category: "Раздел 4. Информационные системы в проф. деятельности", items: [
+            { name: "19. Интерфейс программы Autodesk Inventor", file: "less19.md" },
+            { name: "20. Создание 2D-эскиза", file: "less20.md" },
+            { name: "21. Базовые инструменты и размеры", file: "less21.md" },
+            { name: "22. Проставление и редактирование размеров", file: "less22.md" },
+            { name: "23. Использование фасок и сопряжений", file: "less23.md" },
+            { name: "24. Создание эскизов с использованием фасок", file: "less24.md" },
+            { name: "25. Редактирование эскизов панелью инструментов", file: "less25.md" },
+            { name: "26. Понятие зависимостей", file: "less26.md" },
+            { name: "27. Создание эскизов панелью зависимостей", file: "less27.md" },
+            { name: "28. Панель инструментов Массив", file: "less28.md" },
+            { name: "29. Создание кругов и прямоугольных массивов", file: "less29.md" },
+            { name: "30. Создание обьектов выдавливанием", file: "less30.md" },
+            { name: "31. Операция Вращение", file: "less31.md" },
+            { name: "32. Создание деталей выдавливанием и вращением", file: "less32.md" },
+            { name: "33. Операция Сдвиг и Пружина", file: "less33.md" },
+            { name: "34. Создание деталей Сдвигом", file: "less34.md" },
+            { name: "35. Операция Лофт", file: "less35.md" },
+            { name: "36. Создание деталей Лофтом", file: "less36.md" },
+            { name: "37. Создание деталей на основе чертежа", file: "less37.md" },
+            { name: "38. Создание шаблонов и заготовок", file: "less38.md" },
+            { name: "39. Создание параметрической детали", file: "less39.md" },
+            { name: "40. Назначение и использование сборок", file: "less40.md" },
+            { name: "41. Создание сборки механизма", file: "less41.md" }
+        ]},
+        { category: "Дополнительно", items: [
+            { name: "Примеры элементов", file: "example.md" }
+        ]}
+    ];
+
+    // Функция загрузки статьи
+    function loadArticle(file, name, clickedLink) {
+        fetch(file)
+            .then(response => response.text())
+            .then(text => {
+                title.textContent = name;
+                content.innerHTML = marked.parse(text);
+
+                // Убираем active у всех ссылок
+                document.querySelectorAll(".sidebar ul li a").forEach(link => {
+                    link.classList.remove("active");
+                });
+
+                // Добавляем active к нажатой ссылке
+                clickedLink.classList.add("active");
+            })
+            .catch(error => {
+                content.innerHTML = "Ошибка загрузки статьи.";
+            });
+    }
+
+    // Заполняем меню
+    articles.forEach(section => {
+        let sectionLi = document.createElement("li");
+        let sectionTitle = document.createElement("p");
+        sectionTitle.textContent = section.category;
+        sectionTitle.classList.add("menu-category");
+        sectionLi.appendChild(sectionTitle);
+
+        let subMenu = document.createElement("ul");
+        subMenu.classList.add("submenu");
+
+        section.items.forEach(article => {
+            let li = document.createElement("li");
+            let a = document.createElement("a");
+            a.href = "#"; 
+            a.textContent = article.name;
+            a.onclick = function () {
+                loadArticle(article.file, article.name, a);
+            };
+            li.appendChild(a);
+            subMenu.appendChild(li);
+        });
+
+        sectionLi.appendChild(subMenu);
+        menu.appendChild(sectionLi);
+    });
+
+    // Открытие подменю
+    document.querySelectorAll(".menu-category").forEach(category => {
+        category.addEventListener("click", function () {
+            this.nextElementSibling.classList.toggle("open");
+        });
+    });
+});
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</body>
+</html>
